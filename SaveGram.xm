@@ -112,7 +112,7 @@ static void inline savegram_saveMediaFromPost(IGPost *post) {
 			    NSURL *videoSavedURL = [videoDocumentsURL URLByAppendingPathComponent:[videoURL lastPathComponent]];
 			    [fileManager moveItemAtURL:location toURL:videoSavedURL error:&error];
 
-			    [%c(IGAssetWriter) writeVideoToInstagramAlbum:videoSavedURL completionBlock:nil];
+			    [%c(IGAssetWriter) writeVideoToInstagramAlbum:videoSavedURL completion:nil];
 		 		SGLOG(@"wrote video %@ to Instagram album", videoSavedURL);
 
 				dispatch_async(dispatch_get_main_queue(), ^{
@@ -256,10 +256,10 @@ static SaveGramAlertViewDelegate * savegram_compatibilityAlertDelegate;
 */
 %ctor {
 	NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-	NSComparisonResult newestWaveVersionComparisonResult = [version compare:@"7.1.1" options:NSNumericSearch];
-	SGLOG(@"Instagram %@, comparison result to last official supported build (7.1.1): %i", version, (int)newestWaveVersionComparisonResult);
+	NSComparisonResult newestWaveVersionComparisonResult = [version compare:@"8.4" options:NSNumericSearch];
+	SGLOG(@"Instagram %@, comparison result to last official supported build (8.4): %i", version, (int)newestWaveVersionComparisonResult);
 
-	// If the current version of Instagram is LOWER (not EQUAL TO or HIGHER) than 7.1.1, they should be running a compatibility package
+	// If the current version of Instagram is LOWER (not EQUAL TO or HIGHER) than 8.4, they should be running a compatibility package
 	if (newestWaveVersionComparisonResult == NSOrderedAscending) {
 		NSString *lastVersionConfirmed = savegram_lastVersionUserConfirmedWasSupported();
 		NSComparisonResult lastConfirmedCompatibilityResult = [version compare:savegram_lastVersionUserConfirmedWasSupported() options:NSNumericSearch];
