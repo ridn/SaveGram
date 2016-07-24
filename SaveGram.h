@@ -88,8 +88,15 @@
 @interface IGFeedItemActionCell : UICollectionViewCell <IGActionSheetDelegate>
 
 @property (nonatomic,retain) IGFeedItem *feedItem;
-//removed from this class. moved to IGFeedViewController
+
 //- (void)actionSheetDismissedWithButtonTitled:(NSString *)title;
+
+@end
+
+@interface IGFeedViewController
+
+- (void)sg_setCurrentFeedItemActionCell:(IGFeedItemActionCell*)actionCell;
+- (IGFeedItemActionCell*)sg_currentFeedItemActionCell ;
 
 @end
 
@@ -108,10 +115,9 @@
 + (void)showWithTitle:(NSString *)title delegate:(id)delegate;
 + (void)showWithTitle:(NSString *)title withCallback:(id)callback;
 
-+ (void)addButtonWithTitle:(NSString *)title style:(int)style;
++ (id)sharedIGActionSheet;
 + (void)dismissAnimated:(BOOL)animated;
 - (void)showWithTitle:(NSString *)title;
-//the following method appears to have been removed as of 7.13
 - (void)addButtonWithTitle:(NSString *)title style:(int)style;
 - (void)showWithTitle:(NSString *)title;
 - (void)buttonTapped:(UIButton *)button;
@@ -128,11 +134,11 @@
 
 @property (nonatomic,retain) UIImage *image;
 // @property (nonatomic,retain) CLLocation* location; 				//@synthesize location=_location - In the implementation block
-+ (void)writeVideo:(id)arg1 toInstagramAlbum:(BOOL)arg2 completionBlock:(id)arg3;
-+ (void)writeVideoToCameraRoll:(id)arg1;
-+ (void)writeVideoToInstagramAlbum:(id)arg1 completionBlock:(id)arg2;
++ (void)writeVideo:(id)arg1 toInstagramAlbum:(BOOL)arg2 completion:(id)arg3;
++ (void)writeVideo:(id)arg1 toInstagramAlbum:(BOOL)arg2 completion:(id)arg3;
++ (void)writeVideoToInstagramAlbum:(id)arg1 completion:(id)arg2;
 - (id)initWithImage:(id)arg1 metadata:(id)arg2;
-- (void)writeToInstagramAlbum:(BOOL)arg1;
+- (void)writeToInstagramAlbum:(BOOL)arg1 completion:(id)arg2;
 - (void)showLibraryAccessMessage;
 - (void)writeToCameraRoll;
 - (void)writeToInstagramAlbum;
